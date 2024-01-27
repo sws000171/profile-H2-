@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="jp" xmlns="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>メンバー編集</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link th:href="@{/css/reset.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/profile.css}" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!-- Header Start -->
+    <header class="site-header">
+      <div class="wrapper site-header__wrapper">
+        <a href="#" class="brand">メンバー編集</a>
+        <nav class="nav">
+          <button class="nav__toggle" aria-expanded="false" type="button">
+            menu
+          </button>
+          <ul class="nav__wrapper">
+            <li class="nav__item"><a th:href="@{/}">プロフィール画面</a></li>
+            <li class="nav__item"><a th:href="@{/register}">新規登録</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- Header End -->
+  
+    <table>
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>name</td>
+          <td>occupation</td>
+          <td>memo</td>
+          <td>email</td>
+          <td>other</td>
+          <td>edit</td>
+          <td>delete</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="member : ${member}" th:object="${member}" class="memList">
+          <td>[[*{id}]]</td>
+          <td>[[*{name}]]</td>
+          <td>[[*{occupation}]]</td>
+          <td>[[*{memo}]]</td>
+          <td>[[*{email}]]</td>
+          <td>[[*{other}]]</td>
+          <td><a th:href="@{/edit/{id}(id=*{id})}" class="listBtn">編集</a></td>
+          <td><a th:href="@{/delete/{id}(id=*{id})}" class="listBtn" 
+                 onclick="return confirm('選択データを削除します。よろしいですか？')">削除</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <script th:inline="javascript">
+      const completeMsg = /*[[${completeMsg}]]*/"completeMsg";
+      if (completeMsg != "" && completeMsg != null) {
+        alert(completeMsg);
+      }
+    </script>
+    <script type="text/javascript" th:src="@{/js/header-1.js}"></script>
+  </body>
+</html>

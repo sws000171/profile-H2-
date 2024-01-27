@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="jp" xmlns="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>メンバー編集</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link th:href="@{/css/reset.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{/css/profile.css}" rel="stylesheet" type="text/css" />
+    
+  </head>
+  <body>
+    <!-- Header Start -->
+    <header class="site-header">
+      <div class="wrapper site-header__wrapper">
+        <a href="#" class="brand">メンバー編集</a>
+        <nav class="nav">
+          <button class="nav__toggle" aria-expanded="false" type="button">
+            menu
+          </button>
+          <ul class="nav__wrapper">
+            <li class="nav__item"><a th:href="@{/}">プロフィール画面</a></li>
+            <li class="nav__item"><a th:href="@{/list}">編集</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- Header End -->
+    
+    <form th:action="@{/edit/{id}(id=${id})}" th:object="${member}" method="post" enctype="multipart/form-data" class="contact-form"
+          onSubmit="return check()" >  
+      <input type="hidden" th:field="*{facePath}" th:value="*{facePath}">
+      <input type="hidden" th:field="*{backPath}" th:value="*{backPath}">
+      <div class="item">
+        <label for="faceImg" class="label" >顔写真</label>
+        <p th:if="${faceErr}" th:text="${faceErr}">エラーメッセージ</p>
+        <input id ="faceImg" type="file" name="faceImg" accept="image/jpeg" />
+      </div>
+      <div class="item">
+        <label for="backImg" class="label" >背景写真</label>
+        <p th:if="${backErr}" th:text="${backErr}">エラーメッセージ</p>
+        <input id ="backImg" type="file" name="backImg" accept="image/jpeg" />
+      </div>
+      <div class="item">
+        <label for="name" class="label" >氏名</label>
+        <input type="text" class="form-control" name="name" th:field="*{name}" />
+        <div class="red" th:errors="*{name}"></div>
+      </div>
+      <div class="item">
+        <label for="occupation" class="label">職種</label>
+        <input type="text" class="form-control" name="occupation" th:field="*{occupation}" />
+        <div class="red" th:errors="*{occupation}"></div>
+      </div>
+      <div class="item">  
+        <label for="memo" class="label">メモ</label>
+        <textarea class="form-control" name="memo" th:field="*{memo}" rows="4"></textarea>
+        <div class="red" th:errors="*{memo}"></div>
+      </div>
+      <div class="item">
+        <label for="email" class="label">e-mail</label>
+        <input type="text" class="form-control" name="email" th:field="*{email}" />
+        <div class="red" th:errors="*{email}"></div>
+      </div>
+      <div class="item">
+        <label for="other" class="label">other</label>
+        <input type="text" class="form-control" name="other" th:field="*{other}" />
+        <div class="red" th:errors="*{other}"></div>
+      </div>
+      <div class="item no-label">
+        <input type="submit" class="btn btn-primary" value="Update" />
+      </div>
+    </form>
+    <script th:inline="javascript">
+      const completeMsg = /*[[${completeMsg}]]*/"completeMsg";
+      if (completeMsg != "" && completeMsg != null) {
+        alert(completeMsg);
+      }
+    </script>
+    <script type="text/javascript"> 
+      function check(){
+        if(window.confirm('入力内容で更新します')){
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+    </script>
+    <script type="text/javascript" th:src="@{/js/header-1.js}"></script>
+
+  </body>
+</html>

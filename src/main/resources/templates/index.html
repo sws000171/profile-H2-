@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="jp" xmlns="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>メンバー一覧</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- reset -->
+    <link th:href="@{/css/reset.min.css}" rel="stylesheet" type="text/css" />
+    <!-- initial -->
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+    <!-- header -->
+    <link th:href="@{/css/header.css}" rel="stylesheet" type="text/css" />
+    <!-- メンバー一覧用のcss-->
+    <link th:href="@{/css/member.css}" rel="stylesheet" type="text/css" />
+    <!-- 固有 -->
+    <link th:href="@{/css/profile.css}" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" th:src="@{/js/edit.js}"></script>
+  </head>
+  <body>
+    <!-- Header Start -->
+    <header class="site-header">
+      <div class="wrapper site-header__wrapper">
+        <a href="#" class="brand">メンバープロフィール</a>
+        <nav class="nav">
+          <button class="nav__toggle" aria-expanded="false" type="button">
+            menu
+          </button>
+          <ul class="nav__wrapper">
+            <li class="nav__item"><a th:href="@{/register}">新規登録</a></li>
+            <li class="nav__item"><a th:href="@{/list}">編集</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- Header End -->
+  
+    <div id="list">
+      <!-- メンバー一覧の表示部分 -->
+      <script th:inline="javascript">
+        const member = /*[[${member}]]*/"member";
+        createList();
+      </script>
+    </div>
+    <script th:inline="javascript">
+      const completeMsg = /*[[${completeMsg}]]*/"completeMsg";
+      if (completeMsg != "" && completeMsg != null) {
+        alert(completeMsg);
+      }
+    </script>
+    <script type="text/javascript" th:src="@{/js/header-1.js}"></script>
+  </body>
+</html>
